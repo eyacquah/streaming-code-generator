@@ -1,1 +1,26 @@
 .env
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment folders
+venv/
+.venv/
+
+# macOS specific files
+.DS_Store
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# Pre-commit related caches
+.pre-commit-config.yaml~
+
+# Other Python-related files
+*.egg-info/
+*.pytest_cache/
