@@ -50,7 +50,7 @@ An API for real-time code generation and explanation using OpenAI’s GPT-4 mode
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/streaming-code-generator.git
+   git clone https://github.com/eyacquah/streaming-code-generator.git
    cd streaming-code-generator
    ```
 
