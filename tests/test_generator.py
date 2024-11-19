@@ -1,12 +1,7 @@
-# tests/test_generator.py
-
-import asyncio
-from unittest.mock import AsyncMock, patch
-
 import httpx
 import pytest
 
-from app.generator import MalformedResponseError, RateLimitError, StreamingCodeGenerator
+from app.generator import RateLimitError, StreamingCodeGenerator
 
 
 @pytest.fixture

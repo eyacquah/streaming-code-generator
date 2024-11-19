@@ -1,7 +1,3 @@
-# tests/test_utils.py
-
-import asyncio
-
 import pytest
 
 from app.utils import async_call_with_retry_generator

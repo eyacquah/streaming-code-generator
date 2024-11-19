@@ -4,7 +4,7 @@ import logging
 from typing import AsyncGenerator, Callable, Optional
 
 import httpx
-import tiktoken  # For token counting
+import tiktoken
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

@@ -1,7 +1,3 @@
-# tests/test_routes.py
-
-from unittest import mock
-
 import pytest
 from fastapi import status
 from httpx import ASGITransport, AsyncClient
