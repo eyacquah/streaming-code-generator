@@ -52,187 +52,248 @@ An API for real-time code generation and explanation using OpenAI’s GPT-4 mode
    ```bash
    git clone https://github.com/yourusername/streaming-code-generator.git
    cd streaming-code-generator
-
-   2.	Create a Virtual Environment
    ```
 
-python3 -m venv venv
-source venv/bin/activate # On Windows, use `venv\Scripts\activate`
+2. **Create a Virtual Environment**
 
-    3.	Install Dependencies
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
 
-pip install --upgrade pip
-pip install -r requirements.txt
+3. **Install Dependencies**
 
-Configuration
+   ```bash
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
 
-    1.	Set OpenAI API Key
+---
 
-Create a .env file in the root directory and add your OpenAI API key:
+## Configuration
 
-OPENAI_API_KEY=your_openai_api_key
+1. **Set OpenAI API Key**
 
-    2.	Update Configuration (if necessary)
+   Set your OpenAI API key as an environment variable.
 
-Ensure any other configurations are set appropriately in the app/config.py file.
+   ```bash
+   export OPENAI_API_KEY=your_openai_api_key
+   ```
 
-Usage
+2. **Update Configuration (if necessary)**
 
-Running the Application
+   - Edit the configuration in `app/config.py` as needed.
+   - You can change the default timeouts, retry settings, and other parameters.
 
-    1.	Start the Server
+---
 
-uvicorn app.main:app --reload
+## Usage
 
-This will start the server at http://127.0.0.1:8000.
+### Running the Application
 
-    2.	Access the API
-    •	Navigate to http://127.0.0.1:8000 to see the welcome message.
-    •	API documentation is available at http://127.0.0.1:8000/docs.
+1. **Start the Server**
 
-Using the API Client
+   Run the following command to start the FastAPI server:
 
-An api_client.py script is provided to interact with the API easily. This script allows you to test different scenarios and see how the API responds.
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
-Steps to Use api_client.py
+   This will start the server at http://127.0.0.1:8000.
 
-    1.	Ensure the Server is Running
+### Access the API
 
-Ensure the API server is running as described in Running the Application. 2. Run the API Client Script
+- Navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) to see the welcome message.
+- API documentation is available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-python api_client.py
+### Using the API Client
 
-    3.	Enter a Prompt
+An `api_client.py` script is provided to interact with the API easily. This script allows you to test different scenarios and see how the API responds.
 
-When prompted, enter the code prompt you want to send to the API. Press Enter to use the default prompt. 4. Select a Test to Run
-The script provides several test options:
-• Option 1: Sends a valid prompt and streams the response.
-• Option 2: Tests how the API handles timeouts.
-• Option 3: Sends an invalid payload to test error handling. 5. View the Output
-The script will display the API’s response or any error messages directly in the console.
+#### Steps to Use `api_client.py`
 
-API Endpoints
+1. **Ensure the Server is Running**
 
-POST /generate-code/
+   Ensure the API server is running as described in [Running the Application](#running-the-application).
 
-    •	Description: Generates code with explanations based on the provided prompt. Streams the response in real-time.
-    •	Request Body:
+2. **Run the API Client Script**
 
-{
-"prompt": "Your prompt here"
-}
+   ```bash
+   python api_client.py
+   ```
 
-    •	Responses:
-    •	200 OK: Stream of generated code and explanations.
-    •	400 Bad Request: Invalid request payload.
-    •	504 Gateway Timeout: Request timed out.
-    •	500 Internal Server Error: An error occurred on the server.
+3. **Enter a Prompt**
 
-Testing
+   When prompted, enter the code prompt you want to send to the API. Press Enter to use the default prompt.
 
-Tests are written using pytest. To run the tests: 1. Install Test Dependencies
+4. **Select a Test to Run**
 
-pip install pytest pytest-asyncio httpx
+   The script provides several test options:
 
-    2.	Run Tests
+   - **Option 1**: Sends a valid prompt and streams the response.
+   - **Option 2**: Tests how the API handles timeouts.
+   - **Option 3**: Sends an invalid payload to test error handling.
 
-pytest
+5. **View the Output**
 
-Project Structure
+   The script will display the API’s response or any error messages directly in the console.
 
+---
+
+## API Endpoints
+
+### POST `/generate-code/`
+
+- **Description**: Generates code with explanations based on the provided prompt. Streams the response in real-time.
+- **Request Body**:
+
+  ```json
+  {
+    "prompt": "Your prompt here"
+  }
+  ```
+
+- **Responses**:
+  - `200 OK`: Stream of generated code and explanations.
+  - `400 Bad Request`: Invalid request payload.
+  - `504 Gateway Timeout`: Request timed out.
+  - `500 Internal Server Error`: An error occurred on the server.
+
+---
+
+## Testing
+
+Tests are written using `pytest`. To run the tests:
+
+1. **Install Test Dependencies**
+
+   ```bash
+   pip install pytest pytest-asyncio httpx
+   ```
+
+2. **Run Tests**
+
+   ```bash
+   pytest
+   ```
+
+---
+
+## Project Structure
+
+```plaintext
 streaming-code-generator/
 ├── app/
-│ ├── **init**.py
-│ ├── main.py
-│ ├── routes.py
-│ ├── generator.py
-│ ├── utils.py
-│ └── config.py
+│   ├── __init__.py
+│   ├── main.py
+│   ├── routes.py
+│   ├── generator.py
+│   ├── utils.py
+│   └── config.py
 ├── tests/
-│ ├── **init**.py
-│ ├── test_routes.py
-│ ├── test_generator.py
-│ └── test_utils.py
+│   ├── __init__.py
+│   ├── test_routes.py
+│   ├── test_generator.py
+│   └── test_utils.py
 ├── api_client.py
 ├── requirements.txt
 ├── .pre-commit-config.yaml
 ├── .gitignore
 └── README.md
+```
 
-Contributing
+---
 
-Contributions are welcome! Please follow these steps: 1. Fork the Repository 2. Create a Feature Branch
+## Contributing
 
-git checkout -b feature/your-feature-name
+Contributions are welcome! Please follow these steps:
 
-    3.	Make Changes and Commit
+1. **Fork the Repository**
 
-Ensure code formatting and tests pass before committing.
+2. **Create a Feature Branch**
 
-pre-commit run --all-files
-git add .
-git commit -m "Your descriptive commit message"
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-    4.	Push to Your Fork and Create a Pull Request
+3. **Make Changes and Commit**
 
-Pre-commit Hooks
+   Ensure code formatting and tests pass before committing.
+
+   ```bash
+   pre-commit run --all-files
+   git add .
+   git commit -m "Your descriptive commit message"
+   ```
+
+4. **Push to Your Fork and Create a Pull Request**
+
+---
+
+## Pre-commit Hooks
 
 This project uses pre-commit hooks to maintain code quality.
 
-Configuration (.pre-commit-config.yaml)
+### Configuration (`.pre-commit-config.yaml`)
 
+```yaml
 repos:
+    - repo: https://github.com/psf/black
+        rev: 24.10.0
+        hooks:
+            - id: black
 
-- repo: https://github.com/psf/black
-  rev: 24.10.0
-  hooks:
+    - repo: https://github.com/PyCQA/isort
+        rev: 5.13.2
+        hooks:
+            - id: isort
 
-  - id: black
+    - repo: https://github.com/pycqa/flake8
+        rev: 6.1.0
+        hooks:
+            - id: flake8
+                args: [--ignore=E501] # Ignore line length errors
 
-- repo: https://github.com/PyCQA/isort
-  rev: 5.13.2
-  hooks:
+    - repo: local
+        hooks:
+            - id: pytest
+                name: Run tests with pytest
+                entry: pytest
+                language: system
+                types: [python]
+                pass_filenames: false
+```
 
-  - id: isort
+### Install Pre-commit Hooks
 
-- repo: https://github.com/pycqa/flake8
-  rev: 6.1.0
-  hooks:
-
-  - id: flake8
-    args: [--ignore=E501] # Ignore line length errors
-
-- repo: local
-  hooks:
-  - id: pytest
-    name: Run tests with pytest
-    entry: pytest
-    language: system
-    types: [python]
-    pass_filenames: false
-
-Install Pre-commit Hooks
-
+```bash
 pip install pre-commit
 pre-commit install
+```
 
 Now, tests and linters will run automatically before each commit.
 
-License
+---
+
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Acknowledgements
+---
 
-    •	OpenAI for providing the GPT-4 model.
-    •	FastAPI for the web framework.
-    •	httpx for asynchronous HTTP requests.
-    •	tiktoken for token encoding.
+## Acknowledgements
 
-Contact
+- OpenAI for providing the GPT-4 model.
+- FastAPI for the web framework.
+- httpx for asynchronous HTTP requests.
+- tiktoken for token encoding.
 
-    •	Author: Emmanuel Yaw Acquah
-    •	Email: eyacquah0@gmail.com
-    •	GitHub: eyacquah
+---
+
+## Contact
+
+- **Author**: Emmanuel Yaw Acquah
+- **Email**: [eyacquah0@gmail.com](mailto:eyacquah0@gmail.com)
+- **GitHub**: [eyacquah](https://github.com/eyacquah)
 
 Feel free to reach out for any questions or suggestions!
