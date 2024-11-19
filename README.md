@@ -1,52 +1,60 @@
-Streaming Code Generator
+# Streaming Code Generator
 
 An API for real-time code generation and explanation using OpenAI’s GPT-4 model. This project allows users to send prompts to generate code along with explanations, streaming the responses in real-time.
 
-Table of Contents
+---
 
-    •	Features
-    •	Installation
-    •	Prerequisites
-    •	Steps
-    •	Configuration
-    •	Usage
-    •	Running the Application
-    •	Using the API Client
-    •	API Endpoints
-    •	Testing
-    •	Project Structure
-    •	Contributing
-    •	Pre-commit Hooks
-    •	License
-    •	Acknowledgements
-    •	Contact
+## Table of Contents
 
-Features
+- [Features](#features)
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Steps](#steps)
+- [Configuration](#configuration)
+- [Usage](#usage)
+  - [Running the Application](#running-the-application)
+  - [Using the API Client](#using-the-api-client)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [Pre-commit Hooks](#pre-commit-hooks)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
 
-    •	Real-time Streaming: Stream code generation and explanations in real-time using FastAPI and asynchronous generators.
-    •	Retry Mechanism: Implements a retry mechanism with exponential backoff for handling transient errors and rate limits.
-    •	Timeout Handling: Supports operation timeouts and total timeouts to ensure responsiveness.
-    •	Asynchronous Design: Utilizes asynchronous programming for efficient I/O operations.
-    •	Error Handling: Comprehensive error handling for various scenarios including timeouts, malformed responses, and rate limits.
-    •	Testing: Includes tests for endpoints and utility functions.
-    •	API Client: Provides an api_client.py script to interact with the API easily.
+---
 
-Installation
+## Features
 
-Prerequisites
+- **Real-time Streaming**: Stream code generation and explanations in real-time using FastAPI and asynchronous generators.
+- **Retry Mechanism**: Implements a retry mechanism with exponential backoff for handling transient errors and rate limits.
+- **Timeout Handling**: Supports operation timeouts and total timeouts to ensure responsiveness.
+- **Asynchronous Design**: Utilizes asynchronous programming for efficient I/O operations.
+- **Error Handling**: Comprehensive error handling for various scenarios including timeouts, malformed responses, and rate limits.
+- **Testing**: Includes tests for endpoints and utility functions.
+- **API Client**: Provides an `api_client.py` script to interact with the API easily.
 
-    •	Python 3.7 or higher
-    •	OpenAI API Key
-    •	(Optional) Redis server for rate limiting (if implemented)
+---
 
-Steps
+## Installation
 
-    1.	Clone the Repository
+### Prerequisites
 
-git clone https://github.com/yourusername/streaming-code-generator.git
-cd streaming-code-generator
+- Python 3.7 or higher
+- OpenAI API Key
+- _(Optional)_ Redis server for rate limiting (if implemented)
 
-    2.	Create a Virtual Environment
+### Steps
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/yourusername/streaming-code-generator.git
+   cd streaming-code-generator
+
+   2.	Create a Virtual Environment
+   ```
 
 python3 -m venv venv
 source venv/bin/activate # On Windows, use `venv\Scripts\activate`
