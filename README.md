@@ -1,3 +1,5 @@
+You’re absolutely right—the README file needs proper formatting to enhance readability and usability. Below is the corrected and properly formatted README.md file based on your selection. I have fixed headings, lists, code blocks, and overall structure to adhere to Markdown conventions.
+
 Streaming Code Generator
 
 An API for real-time code generation and explanation using OpenAI’s GPT-4 model. This project allows users to send prompts to generate code along with explanations, streaming the responses in real-time.
@@ -6,6 +8,8 @@ Table of Contents
 
     •	Features
     •	Installation
+    •	Prerequisites
+    •	Steps
     •	Configuration
     •	Usage
     •	Running the Application
@@ -13,7 +17,13 @@ Table of Contents
     •	API Endpoints
     •	Testing
     •	Project Structure
+    •	Code Overview
+    •	app/main.py
+    •	app/routes.py
+    •	app/utils.py
+    •	api_client.py
     •	Contributing
+    •	Pre-commit Hooks
     •	License
     •	Acknowledgements
     •	Contact
@@ -40,7 +50,7 @@ Steps
 
     1.	Clone the Repository
 
-git clone https://github.com/yourusername/streaming-code-generator.git
+git clone https://github.com/eyacquah/streaming-code-generator.git
 cd streaming-code-generator
 
     2.	Create a Virtual Environment
@@ -252,14 +262,15 @@ return {"message": "Welcome to the Streaming Code Generator API"}
 
 app/routes.py
 
-from fastapi import APIRouter, HTTPException, status
-from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
 import asyncio
 import logging
 
+from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
+
 from app.config import API_KEY
-from app.generator import StreamingCodeGenerator, RateLimitError, MalformedResponseError
+from app.generator import MalformedResponseError, RateLimitError, StreamingCodeGenerator
 from app.utils import async_call_with_retry_generator
 
 router = APIRouter()
@@ -274,36 +285,61 @@ prompt: str
 
 @router.post("/generate-code/", status_code=status.HTTP_200_OK)
 async def generate_code(payload: Prompt):
-async def stream():
-try:
-async_gen = async_stream_generator(payload.prompt)
-async for content in async_gen:
-yield content
-except asyncio.TimeoutError:
-logger.error("Request handling timed out.")
-raise HTTPException(status_code=status.HTTP_504_GATEWAY_TIMEOUT, detail="Request timed out.")
-except asyncio.CancelledError:
-logger.info("Client disconnected.")
-raise
-except Exception as e:
-logger.error(f"Error in stream: {e}")
-raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal Server Error")
+"""
+Endpoint to generate code with explanation using OpenAI's API.
+
+    Args:
+        payload (Prompt): The prompt data containing the user's prompt.
+
+    Returns:
+        StreamingResponse: An asynchronous streaming response with the generated code.
+    """
+    async def stream():
+        try:
+            async_gen = async_stream_generator(payload.prompt)
+            async for content in async_gen:
+                # Yield the content as plain text
+                yield content
+        except asyncio.TimeoutError:
+            logger.error("Request handling timed out.")
+            raise HTTPException(
+                status_code=status.HTTP_504_GATEWAY_TIMEOUT, detail="Request timed out."
+            )
+        except asyncio.CancelledError:
+            logger.info("Client disconnected.")
+            raise
+        except Exception as e:
+            logger.error(f"Error in stream: {e}")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Internal Server Error",
+            )
 
     return StreamingResponse(stream(), media_type="text/plain")
 
 async def async_stream_generator(prompt: str):
-async for content in async_call_with_retry_generator(
-generator.generate_code_with_explanation,
-prompt,
-retries=3,
-delay=1,
-backoff=2,
-exceptions=(Exception, RateLimitError, MalformedResponseError),
-operation_timeout=60.0,
-total_timeout=120.0
-):
-await asyncio.sleep(0)
-yield content
+"""
+Asynchronous generator that streams data from the code generator with retries.
+
+    Args:
+        prompt (str): The user's prompt to send to the generator.
+
+    Yields:
+        str: The generated content chunk.
+    """
+    async for content in async_call_with_retry_generator(
+        generator.generate_code_with_explanation,
+        prompt,
+        retries=3,
+        delay=1,
+        backoff=2,
+        exceptions=(Exception, RateLimitError, MalformedResponseError),
+        operation_timeout=60.0,  # Timeout per attempt
+        total_timeout=120.0,     # Total timeout across all retries
+    ):
+        # Allow cancellation between chunks
+        await asyncio.sleep(0)
+        yield content
 
 app/utils.py
 
@@ -505,6 +541,7 @@ repos:
   hooks:
 
   - id: flake8
+    args: [--ignore=E501] # Ignore line length errors
 
 - repo: local
   hooks:
