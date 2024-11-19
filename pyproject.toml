@@ -1,0 +1,11 @@
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+skip-string-normalization = false
+
+[tool.isort]
+profile = "black"
+line_length = 88
