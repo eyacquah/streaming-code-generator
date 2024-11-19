@@ -19,7 +19,6 @@ async def test_generate_code_success(mocker):
         return_value=mock_async_stream_generator(""),
     )
 
-    # Use ASGITransport instead of the deprecated 'app' parameter
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://testserver") as ac:
         response = await ac.post("/generate-code/", json={"prompt": "Test prompt"})
