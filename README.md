@@ -1,5 +1,3 @@
-Understood, here’s the updated README.md with the Code Overview section removed to keep it concise:
-
 Streaming Code Generator
 
 An API for real-time code generation and explanation using OpenAI’s GPT-4 model. This project allows users to send prompts to generate code along with explanations, streaming the responses in real-time.
@@ -68,7 +66,7 @@ OPENAI_API_KEY=your_openai_api_key
 
     2.	Update Configuration (if necessary)
 
-The app/config.py file reads environment variables. Ensure any other configurations are set appropriately.
+Ensure any other configurations are set appropriately in the app/config.py file.
 
 Usage
 
@@ -92,84 +90,18 @@ Steps to Use api_client.py
 
     1.	Ensure the Server is Running
 
-Make sure you have the API server running as described in the Running the Application section. 2. Run the API Client Script
+Ensure the API server is running as described in Running the Application. 2. Run the API Client Script
 
 python api_client.py
 
     3.	Enter a Prompt
 
-When prompted, enter the code prompt you want to send to the API. Press Enter to use the default prompt.
-
-Enter your prompt (or press Enter to use the default):
-
-    4.	Select a Test to Run
-
+When prompted, enter the code prompt you want to send to the API. Press Enter to use the default prompt. 4. Select a Test to Run
 The script provides several test options:
-
-Select a test to run:
-
-1.  Test generate code (normal)
-2.  Test generate code with timeout
-3.  Test generate code with invalid payload
-    Enter the number of the test to run (default is 1):
-
-        •	Option 1: Sends a valid prompt and streams the response.
-        •	Option 2: Tests how the API handles timeouts.
-        •	You will be prompted to enter a timeout duration.
-        •	Option 3: Sends an invalid payload to test error handling.
-
-        5.	View the Output
-
-    The script will display the API’s response or any error messages directly in the console.
-
-Examples
-
-    •	Example 1: Normal Test
-
-python api_client.py
-
-Enter your prompt (or press Enter to use the default):
-Using default prompt: Create a function that sorts a list using bubble sort.
-
-Select a test to run:
-
-1.  Test generate code (normal)
-2.  Test generate code with timeout
-3.  Test generate code with invalid payload
-    Enter the number of the test to run (default is 1):
-
-        •	The script will stream and display the generated code and explanations.
-
-        •	Example 2: Test with Timeout
-
-python api_client.py
-
-Enter your prompt (or press Enter to use the default): Implement a quicksort algorithm.
-
-Select a test to run:
-
-1.  Test generate code (normal)
-2.  Test generate code with timeout
-3.  Test generate code with invalid payload
-    Enter the number of the test to run (default is 1): 2
-    Enter timeout in seconds (default is 0.1):
-
-        •	If the API takes longer than the specified timeout, the script will display a timeout error.
-
-        •	Example 3: Test with Invalid Payload
-
-python api_client.py
-
-Enter your prompt (or press Enter to use the default): Any prompt.
-
-Select a test to run:
-
-1.  Test generate code (normal)
-2.  Test generate code with timeout
-3.  Test generate code with invalid payload
-    Enter the number of the test to run (default is 1): 3
-
-        •	The script sends an invalid payload to the API, and you can observe how the API handles bad requests.
+• Option 1: Sends a valid prompt and streams the response.
+• Option 2: Tests how the API handles timeouts.
+• Option 3: Sends an invalid payload to test error handling. 5. View the Output
+The script will display the API’s response or any error messages directly in the console.
 
 API Endpoints
 
@@ -191,15 +123,12 @@ POST /generate-code/
 Testing
 
 Tests are written using pytest. To run the tests: 1. Install Test Dependencies
-Ensure the following packages are installed:
 
 pip install pytest pytest-asyncio httpx
 
     2.	Run Tests
 
 pytest
-
-This will execute all tests in the tests directory.
 
 Project Structure
 
@@ -222,18 +151,6 @@ streaming-code-generator/
 ├── .gitignore
 └── README.md
 
-    •	app/: Contains the main application modules.
-    •	main.py: Entry point of the application.
-    •	routes.py: Defines API endpoints and their handlers.
-    •	generator.py: Logic for interacting with the OpenAI API.
-    •	utils.py: Utility functions including retry logic.
-    •	config.py: Configuration settings.
-    •	tests/: Contains test cases for the application.
-    •	api_client.py: Client script to test API endpoints.
-    •	.pre-commit-config.yaml: Configuration for pre-commit hooks.
-    •	requirements.txt: List of dependencies.
-    •	README.md: Project documentation.
-
 Contributing
 
 Contributions are welcome! Please follow these steps: 1. Fork the Repository 2. Create a Feature Branch
@@ -254,7 +171,7 @@ Pre-commit Hooks
 
 This project uses pre-commit hooks to maintain code quality.
 
-Configuration (.pre-commit-config.yaml):
+Configuration (.pre-commit-config.yaml)
 
 repos:
 
@@ -286,7 +203,7 @@ repos:
     types: [python]
     pass_filenames: false
 
-Install Pre-commit Hooks:
+Install Pre-commit Hooks
 
 pip install pre-commit
 pre-commit install
