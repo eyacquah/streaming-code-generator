@@ -535,8 +535,8 @@ Acknowledgements
 
 Contact
 
-    •	Author: Your Name
-    •	Email: your.email@example.com
-    •	GitHub: yourusername
+    •	Author: Emmanuel Yaw Acquah
+    •	Email: eyacquah0@gmail.com
+    •	GitHub: eyacquah
 
 Feel free to reach out for any questions or suggestions!
